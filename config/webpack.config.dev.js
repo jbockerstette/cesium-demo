@@ -98,6 +98,7 @@ module.exports = {
   },
   module: {
     unknownContextCritical: false,
+    unknownContextRegExp: /^.\/.*$/,
     strictExportPresence: true,
     rules: [
       // TODO: Disable require.ensure as it's not a standard language feature.
