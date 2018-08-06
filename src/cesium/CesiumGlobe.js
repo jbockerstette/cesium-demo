@@ -10,8 +10,11 @@ const BING_MAPS_KEY =
 const STK_TERRAIN_URL = '//assets.agi.com/stk-terrain/world';
 
 export default class CesiumGlobe extends Component {
-  state = { viewerLoaded: false };
-  cesiumContainer = React.createRef();
+  constructor(props) {
+    super(props);
+    this.state = { viewerLoaded: false };
+    this.cesiumContainer = React.createRef();
+  }
 
   componentDidMount() {
     const imageryProvider = new BingMapsImageryProvider({
