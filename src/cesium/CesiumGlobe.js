@@ -11,6 +11,7 @@ const STK_TERRAIN_URL = '//assets.agi.com/stk-terrain/world';
 
 export default class CesiumGlobe extends Component {
   state = { viewerLoaded: false };
+  cesiumContainer = React.createRef();
 
   componentDidMount() {
     const imageryProvider = new BingMapsImageryProvider({
@@ -22,7 +23,7 @@ export default class CesiumGlobe extends Component {
       url: STK_TERRAIN_URL
     });
 
-    this.viewer = new Viewer(this.cesiumContainer, {
+    this.viewer = new Viewer(this.cesiumContainer.current, {
       animation: false,
       baseLayerPicker: false,
       fullscreenButton: false,
@@ -37,6 +38,7 @@ export default class CesiumGlobe extends Component {
       imageryProvider,
       terrainProvider
     });
+    this.setState({ viewerLoaded: true });
   }
 
   componentWillUnmount() {
@@ -44,6 +46,16 @@ export default class CesiumGlobe extends Component {
       this.viewer.destroy();
     }
   }
+
+  renderContents() {
+    const { viewerLoaded } = this.state;
+    let contents = null;
+    if (viewerLoaded) {
+      contents = <span />;
+    }
+    return contents;
+  }
+
   render() {
     const containerStyle = {
       width: '100%',
@@ -61,13 +73,17 @@ export default class CesiumGlobe extends Component {
       flexGrow: 2
     };
 
+    const contents = this.renderContents();
+
     return (
       <div className="cesiumGlobeWrapper" style={containerStyle}>
         <div
           className="cesiumWidget"
-          ref={element => (this.cesiumContainer = element)}
+          ref={this.cesiumContainer}
           style={widgetStyle}
-        />
+        >
+          {contents}
+        </div>
       </div>
     );
   }
