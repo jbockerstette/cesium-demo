@@ -33,7 +33,11 @@ export class CesiumProjectContents extends Component {
     const { icons = [] } = this.props;
 
     const renderedBillboards = icons.map((icon, index) => (
-      <CesiumBillboard {...icon} billboards={this.billboards} key={index} />
+      <CesiumBillboard
+        {...icon}
+        billboards={this.billboards}
+        key={index.toString()}
+      />
     ));
 
     return <span>{renderedBillboards}</span>;
