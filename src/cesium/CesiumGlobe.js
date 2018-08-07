@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Viewer from 'cesium/Source/Widgets/Viewer/Viewer';
 import BingMapsImageryProvider from 'cesium/Source/Scene/BingMapsImageryProvider';
 import CesiumTerrainProvider from 'cesium/Source/Core/CesiumTerrainProvider';
+import CesiumBillboardExample from './CesiumBillboardExample';
 
 const BING_MAPS_URL = '//dev.virtualearth.net';
 const BING_MAPS_KEY =
@@ -54,7 +55,12 @@ export default class CesiumGlobe extends Component {
     const { viewerLoaded } = this.state;
     let contents = null;
     if (viewerLoaded) {
-      contents = <span />;
+      const { scene } = this.viewer;
+      contents = (
+        <span>
+          <CesiumBillboardExample scene={scene} />
+        </span>
+      );
     }
     return contents;
   }
