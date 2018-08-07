@@ -24,6 +24,10 @@ class App extends React.Component {
     };
   }
 
+  handleLeftClick = coords => {
+    console.log('left mouse clicked at:', coords);
+  };
+
   render() {
     const { reactLogo, redsLogo, label, line } = this.state;
     const icons = [reactLogo, redsLogo];
@@ -41,7 +45,12 @@ class App extends React.Component {
     };
     return (
       <div style={containerStyle}>
-        <CesiumGlobe icons={icons} labels={labels} polylines={polylines} />
+        <CesiumGlobe
+          icons={icons}
+          labels={labels}
+          polylines={polylines}
+          onLeftClick={this.handleLeftClick}
+        />
         <div style={{ position: 'fixed', top: 0 }}>
           <div style={{ color: 'white', fontSize: 40 }}>
             Text Over the Globe

@@ -4,6 +4,7 @@ import Viewer from 'cesium/Source/Widgets/Viewer/Viewer';
 import BingMapsImageryProvider from 'cesium/Source/Scene/BingMapsImageryProvider';
 import CesiumTerrainProvider from 'cesium/Source/Core/CesiumTerrainProvider';
 import { CesiumProjectContents } from './CesiumProjectContents';
+import CesiumClickHandler from './CesiumClickHandler';
 
 const BING_MAPS_URL = '//dev.virtualearth.net';
 const BING_MAPS_KEY =
@@ -56,7 +57,7 @@ export default class CesiumGlobe extends Component {
     let contents = null;
     if (viewerLoaded) {
       const { scene } = this.viewer;
-      const { icons, labels, polylines } = this.props;
+      const { icons, labels, polylines, onLeftClick } = this.props;
       contents = (
         <span>
           <CesiumProjectContents
@@ -65,6 +66,7 @@ export default class CesiumGlobe extends Component {
             labels={labels}
             polylines={polylines}
           />
+          <CesiumClickHandler scene={scene} onLeftClick={onLeftClick} />
         </span>
       );
     }
