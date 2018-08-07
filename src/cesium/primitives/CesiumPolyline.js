@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 
 import Cartographic from 'cesium/Source/Core/Cartographic';
 import Color from 'cesium/Source/Core/Color';
@@ -8,7 +8,7 @@ import shallowEqual from './../../utils/utils';
 
 export default class CesiumPolyline extends Component {
   componentDidMount() {
-    const { polylines, coords } = this.props;
+    const { polylines } = this.props;
 
     if (polylines) {
       this.polyline = polylines.add({
@@ -23,17 +23,17 @@ export default class CesiumPolyline extends Component {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    if (!shallowEqual(prevProps, this.props)) {
+      this.updatePolyline();
+    }
+  }
+
   componentWillUnmount() {
     const { polylines } = this.props;
 
     if (polylines && !polylines.isDestroyed() && this.polyline) {
       polylines.remove(this.polyline);
-    }
-  }
-
-  componentDidUpdate(prevProps) {
-    if (!shallowEqual(prevProps, this.props)) {
-      this.updatePolyline();
     }
   }
 

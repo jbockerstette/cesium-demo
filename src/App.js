@@ -14,23 +14,34 @@ class App extends React.Component {
         image: redsLogoPic,
         scale: 0.3
       },
-      label: { lat: 35.0, lon: -100.0, text: 'Catch phrase here' }
+      label: { lat: 35.0, lon: -100.0, text: 'Catch phrase here' },
+      line: [
+        { lat: 47.5, lon: -122.3, alt: 20000 },
+        { lat: 36.2, lon: -115.0, alt: 20000 },
+        { lat: 39.0, lon: -94.6, alt: 20000 },
+        { lat: 30.4, lon: -81.6, alt: 20000 }
+      ]
     };
   }
 
   render() {
-    const { reactLogo, redsLogo, label } = this.state;
+    const { reactLogo, redsLogo, label, line } = this.state;
     const icons = [reactLogo, redsLogo];
     const labels = [label];
+    const polylines = [line];
 
     const containerStyle = {
       width: '100%',
-
+      height: '100%',
+      top: 0,
+      left: 0,
+      bottom: 0,
+      right: 0,
       position: 'fixed'
     };
     return (
       <div style={containerStyle}>
-        <CesiumGlobe icons={icons} labels={labels} />
+        <CesiumGlobe icons={icons} labels={labels} polylines={polylines} />
         <div style={{ position: 'fixed', top: 0 }}>
           <div style={{ color: 'white', fontSize: 40 }}>
             Text Over the Globe
