@@ -56,9 +56,10 @@ export default class CesiumGlobe extends Component {
     let contents = null;
     if (viewerLoaded) {
       const { scene } = this.viewer;
+      const { logoCoords } = this.props;
       contents = (
         <span>
-          <CesiumBillboardExample scene={scene} />
+          <CesiumBillboardExample scene={scene} logoCoords={logoCoords} />
         </span>
       );
     }
