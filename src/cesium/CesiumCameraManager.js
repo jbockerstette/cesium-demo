@@ -38,14 +38,18 @@ export default class CesiumCameraManager extends Component {
   componentDidMount() {
     const { camera } = this.props;
     if (camera) {
-      this.handleUpdatedCameraProps({}, this.props.globe, camera);
+      CesiumCameraManager.handleUpdatedCameraProps(
+        {},
+        this.props.globe,
+        camera
+      );
     }
   }
 
   componentDidUpdate(prevProps) {
     const { flyToLocation, camera } = this.props;
     if (prevProps.flyToLocation !== flyToLocation) {
-      this.handleUpdatedCameraProps(
+      CesiumCameraManager.handleUpdatedCameraProps(
         prevProps.flyToLocation,
         flyToLocation,
         camera

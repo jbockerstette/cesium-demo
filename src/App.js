@@ -20,16 +20,23 @@ class App extends React.Component {
         { lat: 36.2, lon: -115.0, alt: 20000 },
         { lat: 39.0, lon: -94.6, alt: 20000 },
         { lat: 30.4, lon: -81.6, alt: 20000 }
-      ]
+      ],
+      flyToLocation: null
     };
   }
+
+  handleFlyToClicked = () => {
+    this.setState({
+      flyToLocation: { lat: 32.6925, lon: -117.1587, alt: 100000 }
+    });
+  };
 
   handleLeftClick = coords => {
     console.log('left mouse clicked at:', coords);
   };
 
   render() {
-    const { reactLogo, redsLogo, label, line } = this.state;
+    const { reactLogo, redsLogo, label, line, flyToLocation } = this.state;
     const icons = [reactLogo, redsLogo];
     const labels = [label];
     const polylines = [line];
@@ -50,11 +57,15 @@ class App extends React.Component {
           labels={labels}
           polylines={polylines}
           onLeftClick={this.handleLeftClick}
+          flyToLocation={flyToLocation}
         />
         <div style={{ position: 'fixed', top: 0 }}>
           <div style={{ color: 'white', fontSize: 40 }}>
             Text Over the Globe
           </div>
+          <button style={{ fontSize: 40 }} onClick={this.handleFlyToClicked}>
+            Jump Camera Location
+          </button>
         </div>
       </div>
     );
